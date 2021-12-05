@@ -24,8 +24,8 @@ function App() {
 // useEffect runs  once when the app loads()
  useEffect(()=>{
   db.collection('taskone').orderBy('timestamp' , 'desc').onSnapshot(snapshot => {
-    console.log(snapshot.docs.map(doc=>doc.data()));//gives array of objects
-    setTodos(snapshot.docs.map(doc=>doc.data().todo))
+   // console.log(snapshot.docs.map(doc=>doc.data()));//gives array of objects
+    setTodos(snapshot.docs.map(doc=>({id:doc.id , todo:doc.data().todo})))
   })
  },[]);
 
@@ -69,7 +69,7 @@ function App() {
         <ul>
           {todos.map((todo) => (
             // <li>{todo}</li>
-            <Todo text={todo}/>
+            <Todo todo={todo}/>
           ))}
         </ul>
       
